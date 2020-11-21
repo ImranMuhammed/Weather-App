@@ -79,10 +79,12 @@ section{
     text-align: center;
 }
 
-.date{
+.date .time{
 font-size: 20px;
 text-align: center;
 }
+
+
 
 .weather-data{
     display: flex;

@@ -6,6 +6,7 @@ var weather=document.querySelector('.weather');
 var hi_low=document.querySelector('.hi-low');
 var wind=document.querySelector('.wind');
 var body=document.querySelector("body");
+var time=document.querySelector(".time")
 
 const api={
     key:"cf797e7e895a395a631e1542cb0c9f8d",
@@ -37,6 +38,8 @@ function displayWeatherData(data){
     var formattedDate=formatDate(date);
     dates.innerHTML=formattedDate;
 
+    time.innerHTML=formatTime(date);
+
     temp.innerText=`${Math.round(data.main.temp-273.15)}°c`
 
     weather.innerHTML=`${data.weather[0].main}`
@@ -60,6 +63,13 @@ function formatDate(d){
     var month=months[d.getMonth()];
     var year=d.getFullYear();
     return `${day} ${date} ${month} ${year}`
+}
+
+function formatTime(time){
+    var hour=time.getHours();
+    var minutes=time.getMinutes();
+
+    return `${hour}:${minutes}`
 }
 
 function weatherImage(weatherIcon){
