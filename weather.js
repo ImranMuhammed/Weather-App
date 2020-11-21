@@ -38,7 +38,6 @@ function displayWeatherData(data){
     var formattedDate=formatDate(date);
     dates.innerHTML=formattedDate;
 
-    time.innerHTML=formatTime(date);
 
     temp.innerText=`${Math.round(data.main.temp-273.15)}°c`
 
@@ -65,12 +64,6 @@ function formatDate(d){
     return `${day} ${date} ${month} ${year}`
 }
 
-function formatTime(time){
-    var hour=time.getHours();
-    var minutes=time.getMinutes();
-
-    return `${hour}:${minutes}`
-}
 
 function weatherImage(weatherIcon){
     var weather="";
