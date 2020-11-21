@@ -5,6 +5,7 @@ var dates=document.querySelector('.date');
 var weather=document.querySelector('.weather');
 var hi_low=document.querySelector('.hi-low');
 var wind=document.querySelector('.wind');
+var body=document.querySelector("body");
 
 const api={
     key:"cf797e7e895a395a631e1542cb0c9f8d",
@@ -40,9 +41,14 @@ function displayWeatherData(data){
 
     weather.innerHTML=`${data.weather[0].main}`
 
-    hi_low.innerHTML=`${MAth.round(data.main.temp_min-273.15)}°c / ${Math.round(data.main.temp_max-273.15)}°c`
+    hi_low.innerHTML=`${Math.round(data.main.temp_min-273.15)}°c / ${Math.round(data.main.temp_max-273.15)}°c`
 
-    wind.innerHTML=`Wind: ${data.wind.speed} `
+    wind.innerHTML=`Wind: ${data.wind.speed} km/h `
+
+    var backgroundImage=weatherImage(data.weather[0].icon);
+    console.log(backgroundImage)
+  
+    body.setAttribute('background',backgroundImage);
 
 }
 
@@ -54,4 +60,35 @@ function formatDate(d){
     var month=months[d.getMonth()];
     var year=d.getFullYear();
     return `${day} ${date} ${month} ${year}`
+}
+
+function weatherImage(weatherIcon){
+    var weather="";
+    switch(parseInt(weatherIcon)){
+        case 1:weather+="clear sky ";
+                break;
+        case 2:
+        case 3:
+        case 4:weather+="few clouds ";
+                break;
+        case 9:
+        case 10:weather+="rain ";
+                break;
+        case 11:weather+="thunder storm ";
+                break;
+        case 13:weather+="snow ";
+                break;
+        case 50:weather+="mist ";
+                break;
+        default:weather+="few clouds ";
+                break;
+    }
+
+    if(weatherIcon.endsWith("n")){
+        weather+="night";
+    }else if(weatherIcon.endsWith("d")){
+        weather+="day";
+    }
+
+    return "./images/"+weather+".jpg";
 }
